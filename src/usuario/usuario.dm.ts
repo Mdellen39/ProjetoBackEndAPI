@@ -93,7 +93,7 @@ export class UsuariosArmazenados{
             usuarioSalvo => usuarioSalvo.id !== id
         )
 
-        return usuario;     FSDFSDFSFS
+        return usuario; DAKODAKODSKADSOKDSAOKDSAO
     }
     
     //função para retornar todos os usuarios
