@@ -9,3 +9,4 @@ export class RetornoUsuarioDTO{
         readonly usuario: UsuarioEntity
         ){}
 }
+
