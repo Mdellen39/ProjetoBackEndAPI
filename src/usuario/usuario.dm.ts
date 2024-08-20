@@ -15,7 +15,7 @@ export class UsuariosArmazenados{
     }
 
 
-    //função resposável por pesquisar usuários que tenham o email especificado 
+    //função resposavel por pesquisar usuários que tenham o email especificado 
     pesquisaEmail(email:string){
 
         //função find procura no vetor os dados com base no que foi especificado na função de parada( usuario.email = email)
