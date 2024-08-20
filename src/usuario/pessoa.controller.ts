@@ -14,7 +14,7 @@ export class PessoaController {
             uuid(), 
             dadosPessoa.nome, 
             dadosPessoa.nascimento, 
-            dadosPessoa.país
+            dadosPessoa.pais
         );
         this.pessoas.AdicionarPessoa(novaPessoa);
         return { mensagem: 'Pessoa criada', pessoa: novaPessoa };        

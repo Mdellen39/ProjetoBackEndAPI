@@ -7,10 +7,6 @@ import { EmailUnico } from "../validacao/email-unico.validator";
 export class criaPessoaDTO{
 
     @IsString()
-    @IsNotEmpty({ message: "ID não pode ser vazio" })
-    id: string;
-
-    @IsString()
     @IsNotEmpty({message: "nome não pode ser vazio"})
     nome: string;
 
@@ -18,6 +14,8 @@ export class criaPessoaDTO{
     nascimento: number;
 
     @IsString()
-    país: string;
+    pais: string;
 }
+
+
 
