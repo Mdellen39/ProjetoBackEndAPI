@@ -67,7 +67,7 @@ export class UsuariosArmazenados{
         return (possivelUsuario === undefined)
     }
 
-    //função responsável por fazer a validação de login
+    //função responsável por fazer a validação de logon
     Login(email:string ,senha:string){
         //primeiro é pesquisado o usuário por meio do email
         const possivelUsuario = this.pesquisaEmail(email)
