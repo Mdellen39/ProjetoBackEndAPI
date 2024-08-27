@@ -2,12 +2,13 @@
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 import { UsuariosArmazenados } from "../usuario.dm";
 import { Injectable } from "@nestjs/common";
+import { FilmeArmazenados } from "src/filmes/filme.dm";
 
 @Injectable()
 @ValidatorConstraint({async:true})
 //criação da classe com base na interface de validator
 export class emailUnicoValidator implements ValidatorConstraintInterface{
-    constructor(private Usuarios : UsuariosArmazenados){
+    constructor(private Usuarios : FilmeArmazenados){
 
     }
     //função de validação, onde é feita a chamada da validação do email unico
