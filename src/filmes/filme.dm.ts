@@ -6,6 +6,9 @@ import { FilmeEntity } from "./filme.entity";
 //Decorator responsável por informar que essa classe pode ser injetada em outras classes, podendo assim ser administrada pelo modulo
 @Injectable()
 export class FilmeArmazenados{
+    validaEmail(value: any) {
+        throw new Error("Method not implemented.");
+    }
     //Criação de vetor para armazenar os usuários (apenas em memoria, quando reiniciar a API perde tudo)
     #filme: FilmeEntity[] = [];  
     Filme: any;
@@ -49,7 +52,6 @@ export class FilmeArmazenados{
         return filme;
         
     }
-
 
     async removeFilme(id: string) {
         const filme = this.pesquisaId(id);
