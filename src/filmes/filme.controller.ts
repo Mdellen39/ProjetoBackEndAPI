@@ -30,8 +30,7 @@ export class FilmeController {
     async criaFilme(@Body() dadosFilme: criaFilmeDTO) {
         //criação do objeto de usuário, aqui é criado um objeto específico desse usuário 
         var novoFilme = new FilmeEntity(uuid(), dadosFilme.nome, dadosFilme.duracao,
-            dadosFilme.sinopse, dadosFilme.ano,
-            dadosFilme.genero
+            dadosFilme.sinopse, dadosFilme.ano, dadosFilme.genero
         )
         //gravação do usuário, aqui é inserido no DM o usuário criado anteriormente
         this.Filme.AdicionarFilme(novoFilme);
