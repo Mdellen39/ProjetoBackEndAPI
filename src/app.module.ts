@@ -2,10 +2,11 @@
 
 import { Module } from '@nestjs/common';
 import { UsuarioModule } from './usuario/usuario.module';
-import { PessoaModule } from './usuario/pessoa.module'; // Verifique o caminho correto
+import { FilmeModule } from './filmes/filme.module';
+import { PessoaModule } from './usuario/pessoa.module';
 
 @Module({
-  imports: [UsuarioModule, PessoaModule],
+  imports: [UsuarioModule, FilmeModule, PessoaModule],
 })
 export class AppModule {}
 

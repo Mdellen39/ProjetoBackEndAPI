@@ -10,3 +10,9 @@ export class ListaFilmeDTO{
             readonly sinopse: string,
     ){}
 }
+
+export class ListagemFilmeDto {
+    constructor (
+        readonly filme: ListaFilmeDTO[],
+    ){}
+}

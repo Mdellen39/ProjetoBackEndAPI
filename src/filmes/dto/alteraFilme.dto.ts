@@ -1,7 +1,7 @@
 //classe responsável por definir padrão para alteração de usuários
 //DTO é "data transfer object" ou objeto de transferencia de dados, ou seja, é um tipo de classe para transferir dados
 import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, MinLength } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class alteraFilmeDTO {
 
@@ -10,7 +10,7 @@ export class alteraFilmeDTO {
     @IsString()
     @IsNotEmpty({ message: "nome não pode ser vazio" })
     @IsOptional()
-    @ApiProperty({
+    @ApiPropertyOptional({
         example: 'A volta dos que não foram',
         description: 'Nome do filme, deve ser informado um texto contendo o nome'
     })
@@ -18,7 +18,7 @@ export class alteraFilmeDTO {
 
     @IsNumber()
     @IsOptional()
-    @ApiProperty({
+    @ApiPropertyOptional({
         example: '120',
         description: 'Duração fo filme em minutos, deve ser informado como number'
     })
@@ -26,7 +26,7 @@ export class alteraFilmeDTO {
 
     @IsString()
     @IsOptional()
-    @ApiProperty({
+    @ApiPropertyOptional({
         example: 'Um filme que conta a historia de.....',
         description: 'Sinopse do filme que esta sendo inserido'
     })
@@ -34,7 +34,7 @@ export class alteraFilmeDTO {
 
     @IsString()
     @IsOptional()
-    @ApiProperty({
+    @ApiPropertyOptional({
         example: '1990',
         description: 'Ano do lançamento do filme, deve ser informado em texto'
     })
@@ -42,7 +42,7 @@ export class alteraFilmeDTO {
 
     @IsString()
     @IsOptional()
-    @ApiProperty({
+    @ApiPropertyOptional({
         example: 'Açao',
         description: 'Genero do filme a ser inserido'
     })

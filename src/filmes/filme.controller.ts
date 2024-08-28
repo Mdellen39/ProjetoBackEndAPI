@@ -7,9 +7,10 @@ import { FilmeEntity } from "./filme.entity";
 import { v4 as uuid } from 'uuid'
 import { FilmeArmazenados } from "./filme.dm";
 import { RetornoFilmeDTO } from "../filmes/dto/retornoFilme.dto";
-import { ListaFilmeDTO } from "../filmes/dto/listaFilme.dto";
+import { ListaFilmeDTO, ListagemFilmeDto } from "../filmes/dto/listaFilme.dto";
 import { alteraFilmeDTO } from "../filmes/dto/alteraFilme.dto";
 import { stringify } from "querystring";
+import { ApiResponse } from "@nestjs/swagger";
 
 //decorator responsável por definir que essa classe é um controller, dentro do parenteses é necessário informar o URL desse controller
 @Controller('/filme')
@@ -65,21 +66,22 @@ export class FilmeController {
     }
 
     @Get()//aqui é criado um método GET sem nenhum tipo de recepção de dados, onde é retornada uma lista de uusários
-    async retornaFilme() {
+    @ApiResponse({status: 200, description: 'Retorna que houve sucesso na consulta'})
+    async retornaFilme(): Promise <ListagemFilmeDto>{
         //Aqui são pesquisados os usuários a serem listados, depois é feito um mapeamento de dados para retornar as informações no padrão de resposta esperado (listaFilmeDTO)
-        var filmeListados = this.Filme.Filme;
-        const ListaRetorno = filmeListados.map(
+        var filmesListados = this.Filme.filme;
+        const ListaRetorno = filmesListados.map(
             filme => new ListaFilmeDTO(
-                filmeListados.id,
-                filmeListados.nome,
-                filmeListados.duracao,
-                filmeListados.sinopse
+                filme.id,
+                filme.nome,
+                filme.duracao,
+                filme.sinopse
             )
         );
 
-        return {
-            Filme: ListaRetorno
-        };
+        const retorno = new ListagemFilmeDto(ListaRetorno);
+
+        return retorno
     }
 
 
