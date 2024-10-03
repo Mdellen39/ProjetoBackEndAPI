@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Put, Delete } from "@nestjs/common";
 import { v4 as uuid } from 'uuid';
 import { PessoasArmazenadas } from "./pessoa.dm"; // Verifique o nome
-import { PessoaEntity } from "./pessoa.entity";
-import { criaPessoaDTO } from "./dto/pessoa.dto";
+import { PessoaEntity } from "../pessoa/pessoa.entity";
+import { criaPessoaDTO } from "../pessoa/dtopessoa/pessoa.dto";
 
 @Controller('/pessoas')
 export class PessoaController {
