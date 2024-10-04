@@ -30,3 +30,6 @@ export const EmailUnico = (opcoesValidacao: ValidationOptions) => {
         })
     }
 }
+
+
+
