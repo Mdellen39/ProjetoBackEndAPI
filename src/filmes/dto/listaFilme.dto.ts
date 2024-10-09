@@ -7,12 +7,12 @@ export class ListaFilmeDTO{
             readonly id: string, 
             readonly nome:string,
             readonly duracao: number,
-            readonly sinopse: string,
+            readonly sinopse: string
     ){}
 }
 
-export class ListagemFilmeDto {
-    constructor (
+export class ListagemFilmesDTO{
+    constructor(
         readonly filme: ListaFilmeDTO[],
     ){}
 }

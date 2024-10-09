@@ -1,113 +1,109 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { GENERO } from "./genero.entity";
+import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { CriaGeneroDTO } from "./dtogenero/criaGenero.dto";
-import { RetornoCadastroDTO, RetornoObjDTO } from "./dtogenero/retorno.dto";
-import { AlteraGeneroDTO } from "./dtogenero/atualizaGenero.dto";
-import {v4  as uuid} from 'uuid'
+import {v4 as uuid} from 'uuid';
+import { GENERO } from './genero.entity';
+import { CriaGeneroDTO } from './dtogenero/criaGenero.dto';
+import { AlteraGeneroDTO } from './dtogenero/atualizaGenero.dto';
+import { RetornoCadastroDTO, RetornoObjDTO } from 'src/dto/retorno.dto';
+
 
 @Injectable()
 export class GeneroService {
-    constructor(
-        @Inject('GENERO_REPOSITORY')
-        private generoRepository: Repository<GENERO>,
-    ) {}
+  constructor(
+    @Inject('GENERO_REPOSITORY')
+    private generoRepository: Repository<GENERO>,
+  ) {}
 
-    async listar (): Promise<GENERO[]> {
-        return this.generoRepository.find();
-    }
+  async listar(): Promise<GENERO[]> {
+    return this.generoRepository.find();
+  }
 
-    async inserir(dados: CriaGeneroDTO): Promise<RetornoCadastroDTO> {
-        let genero = new GENERO();
+  async inserir(dados: CriaGeneroDTO): Promise<RetornoCadastroDTO>{
+    let genero = new GENERO();
         genero.ID = uuid();
         genero.NOME = dados.NOME;
         genero.DESCRICAO = dados.DESCRICAO;
 
-        return this.generoRepository.save(genero)
-            .then((result) => {
-                return <RetornoCadastroDTO>{
-                    id: genero.ID,
-                    message: "Genero Cadastrado!!"
-                };
-            })
-            .catch((error) => {
-                return <RetornoCadastroDTO>{
-                    id: "",
-                    message: "Houve um erro ao cadastrar." + error.message
-                };
-            })
+    return this.generoRepository.save(genero)
+    .then((result) => {
+      return <RetornoCadastroDTO>{
+        id: genero.ID,
+        message: "Genero cadastrado!"
+      };
+    })
+    .catch((error) => {
+      return <RetornoCadastroDTO>{
+        id: "",
+        message: "Houve um erro ao cadastrar." + error.message
+      };
+    })
+  }
+
+  localizarID(ID: string): Promise<GENERO> {
+    return this.generoRepository.findOne({
+      where: {
+        ID,
+      },
+    });
+  }
+
+  localizarNome(NOME: string): Promise<GENERO> {
+    return this.generoRepository.findOne({
+      where: {
+        NOME,
+      },
+    });
+  }
 
 
-    }
 
-    async alterar(id: string, dados: AlteraGeneroDTO): Promise<RetornoCadastroDTO> {
-        const genero = await this.localizarID(id);
 
-        Object.entries(dados).forEach(
-            ([chave, valor]) => {
-                if (chave === 'id') {
-                    return;
-                }
-                genero[chave] = valor;
-            }
-        )
+  
 
-        return this.generoRepository.save(genero)
-            .then((result) => {
-                return <RetornoCadastroDTO>{
-                    id: genero.ID,
-                    message: "Genero Alterado!"
-                };
-            })
 
-            .catch((error) => {
-                return <RetornoCadastroDTO>{
-                    id: "",
-                    message: "Houve um erro ao alterar." + error.message
-                };
-            })
-
-    }
-
-    async remover(id: string): Promise <RetornoObjDTO> {
-        const genero = await this.localizarID(id);
-
-        return this.generoRepository.remove(genero)
-            .then((result) => {
-                return <RetornoObjDTO>{
-                    return: genero,
-                    message: "Genero Excluido!"
-                };
-            })
-            .catch((error) => {
-                return <RetornoObjDTO>{
-                    return: genero,
-                    message: "Houve um erro ao excluir." + error.message
-                }
-            });
-    }
-
-    localizarID (ID: string): Promise<GENERO> {
-        return this.generoRepository.findOne ({
-            where: {
-                ID,
-            },
-        });
-    }
-
-    LocalizarNome (NOME: string): Promise<GENERO> {
-        return this.generoRepository.findOne({
-            where: {
-                NOME,
-            },
-        });
-    }
-
+  async remover(id: string): Promise<RetornoObjDTO> {
+    const genero = await this.localizarID(id);
     
+    return this.generoRepository.remove(genero)
+    .then((result) => {
+      return <RetornoObjDTO>{
+        return: genero,
+        message: "Genero excluido!"
+      };
+    })
+    .catch((error) => {
+      return <RetornoObjDTO>{
+        return: genero,
+        message: "Houve um erro ao excluir." + error.message
+      };
+    });  
+  }
 
+  async alterar(id: string, dados: AlteraGeneroDTO): Promise<RetornoCadastroDTO> {
+    const genero = await this.localizarID(id);
 
+    Object.entries(dados).forEach(
+      ([chave, valor]) => {
+          if(chave=== 'id'){
+              return;
+          }
 
+          genero[chave] = valor;
+      }
+    )
 
-
-
+    return this.generoRepository.save(genero)
+    .then((result) => {
+      return <RetornoCadastroDTO>{
+        id: genero.ID,
+        message: "Genero alterado!"
+      };
+    })
+    .catch((error) => {
+      return <RetornoCadastroDTO>{
+        id: "",
+        message: "Houve um erro ao alterar." + error.message
+      };
+    });
+  }
 }
