@@ -47,8 +47,6 @@ export class FilesService {
                 return possivelArquivo;
             }
 
-
-
 }
 
 
