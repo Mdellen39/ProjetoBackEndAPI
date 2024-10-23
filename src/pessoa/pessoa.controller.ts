@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { RetornoCadastroDTO, RetornoObjDTO } from "src/dto/retorno.dto";
-import { PESSOA } from "./pessoa.entity";
 import { PessoaService } from "./pessoa.service";
+import { PESSOA } from "./pessoa.entity";
 import { CriaPessoaDTO } from "./dtopessoa/criaPessoa.dto";
 import { AlteraPessoaDTO } from "./dtopessoa/atualizaPessoa.dto";
 
@@ -21,6 +21,10 @@ export class PessoaController{
         return this.pessoaService.inserir(dados)        
     }
 
+    // async inserir(filme: FILME, dados: CriaPessoaDTO, FUNCAO: string): Promise<RetornoCadastroDTO>{
+    //     // ... código existente
+    // }
+
     @Put(':id')
     async alterarPessoa(@Body() dados: AlteraPessoaDTO,@Param('id') id: string): Promise<RetornoCadastroDTO>{        
         return this.pessoaService.alterar(id,dados)        
@@ -35,5 +39,4 @@ export class PessoaController{
     async removePessoa(@Param('id') id: string): Promise<RetornoObjDTO>{
         return this.pessoaService.remover(id);
     }    
-
 }
