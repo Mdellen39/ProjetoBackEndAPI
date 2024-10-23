@@ -5,17 +5,43 @@ import { RetornoCadastroDTO, RetornoObjDTO } from 'src/dto/retorno.dto';
 import { FILME } from './filme.entity';
 import { criaFilmeDTO } from './dto/filme.dto';
 import { alteraFilmeDTO } from './dto/alteraFilme.dto';
-import { GENERO } from 'src/genero/genero.entity';
 import { GeneroService } from 'src/genero/genero.service';
-import { ListaFilmeDTO } from './dto/listafilme.dto';
+import { ListaFilmeDTO } from './dto/listaFilme.dto';
+import { RetornoElencoDTO } from '../fillme_pessoa/dto/retornoelenco.dto';
+import { atorFilmeDTO } from './dto/ator.Filme.dto'
+import { PessoaService } from 'src/pessoa/pessoa.service';
+
 
 @Injectable()
 export class FilmeService {
   constructor(
     @Inject('FILME_REPOSITORY')
     private filmeRepository: Repository<FILME>,
-    private readonly generoService: GeneroService,
+    private readonly filmeAtorService:  PessoaService,    
+    private readonly atorService:  PessoaService,
+    private readonly generoService: GeneroService,    
   ) {}
+
+  async addAtor(dados: atorFilmeDTO): Promise<RetornoCadastroDTO> {
+    const filme = await this.localizarID(dados.IDFILME);
+    const ator = await this.atorService.localizarID(dados.IDATOR);
+    
+    return this.filmeAtorService.inserir(filme,ator,dados.FUNCAO);    
+  }
+
+  async removeAtor(dados: atorFilmeDTO): Promise<RetornoCadastroDTO> {
+    const filme = await this.localizarID(dados.IDFILME);
+    const ator = await this.atorService.localizarID(dados.IDATOR);
+    
+    return this.filmeAtorService.remover(filme,ator);
+  }
+
+  async listarAtor(idfilme: string): Promise<RetornoElencoDTO> {
+    const filme = await this.localizarID(idfilme);
+    
+    return this.filmeAtorService.listarElenco(filme);
+  }
+
 
   async listar(): Promise<ListaFilmeDTO[]> {
     var filmesListados = await this.filmeRepository.find();

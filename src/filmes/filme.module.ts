@@ -4,7 +4,7 @@
 import { Module } from '@nestjs/common';
 import { FilmeController } from './filme.controller';
 import { filmeProviders } from './filme.providers';
-import { generoProviders } from 'src/genero/genero.provider';
+import { generoProviders } from '../genero/genero.providers';
 import { GeneroService } from 'src/genero/genero.service';
 import { FilmeService } from './filme.service';
 import { DatabaseModule } from 'src/database/database.module';

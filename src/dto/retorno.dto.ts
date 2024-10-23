@@ -1,5 +1,3 @@
-import { ApiPropertyOptional } from "@nestjs/swagger";
-
 
 export class RetornoCadastroDTO{
     id: string;
@@ -8,5 +6,10 @@ export class RetornoCadastroDTO{
 
 export class RetornoObjDTO{
     return: any;
+    message: string;
+}
+
+export class RetornoSerieDTO {
+    success: boolean;
     message: string;
 }

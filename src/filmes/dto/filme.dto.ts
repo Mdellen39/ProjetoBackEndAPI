@@ -1,13 +1,9 @@
-
-//DTO responsável por receber dados de criação de um novo usuário
-//DTO é "data transfer object" ou objeto de transferencia de dados, ou seja, é um tipo de classe para transferir dados
-
 import { IsEmail, IsNotEmpty, IsNumber, IsString, MinLength } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class criaFilmeDTO{
+export class criaFilmeDTO {
     @IsString()
-    @IsNotEmpty({message: "nome não pode ser vazio"})
+    @IsNotEmpty({ message: "nome não pode ser vazio" })
     @ApiProperty({
         example: "A volta dos que não foram",
         description: "Nome do filme, deve ser informado um texto contendo o nome"
@@ -16,14 +12,14 @@ export class criaFilmeDTO{
 
     @IsNumber()
     @ApiProperty({
-        example: "120",
+        example: 120, // Corrigido para um número, sem aspas
         description: "Duração do filme em minutos, deve ser informado como number"
     })
     DURACAO: number;
 
     @IsString()
     @ApiProperty({
-        example: "Um filme que conta a historia de ......",
+        example: "Um filme que conta a história de ......",
         description: "Sinopse do filme que está sendo inserido"
     })
     SINOPSE: string;
@@ -36,9 +32,10 @@ export class criaFilmeDTO{
     ANO: string;
 
     @IsString()
+    @IsNotEmpty({ message: "gênero não pode ser vazio" }) // Validação para garantir que o gênero não seja vazio
     @ApiProperty({
-        example: "1a057a24-8b3b-444a-b305-dad891d363f7",
-        description: "ID do Genero do filme a ser inserido"
+        example: "Ação", // Exemplo do nome do gênero
+        description: "Nome do gênero do filme a ser inserido"
     })
-    GENERO: string;
+    GENERO: string; // Mudado para usar o nome do gênero
 }
